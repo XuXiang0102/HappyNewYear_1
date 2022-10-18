@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HappyNewYear</title>
+    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="stylesheet" href="./lib/iconfont/iconfont.css">
+    <style>
+        /* 清除默认样式 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* body背景颜色 */
+        body {
+            /* background-color: aqua; */
+            background-color: rgb(20, 20, 20);
+        }
+
+        /* 顶部文字部分 */
+        .topword {
+            position: absolute;
+            left: 50%;
+            top: 7%;
+            transform: translateX(-50%);
+            color: rgb(133, 133, 133);
+        }
+
+        /* 顶部文字部分 dot */
+        /* 透明度设为0表示完全透明，不可见 */
+        .dot1 {
+            opacity: 0;
+            animation: dotopacity1 1.5s infinite;
+        }
+        .dot2 {
+            opacity: 0;
+            animation: dotopacity2 1.5s infinite;
+        }
+        .dot3 {
+            opacity: 0;
+            animation: dotopacity3 1.5s infinite;
+        }
+
+        /* 头像整体部分 */
+        .avatarall {
+            position: absolute;
+            left: 50%;
+            top: 30%;
+            transform: translateX(-50%);            
+            width: 100px;
+            height: 138px;
+            /* background-color: skyblue; */
+            /* 让文字水平居中 */
+            text-align: center;
+        }
+
+        /* 头像图片部分 */
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: url(./images/xx.jpg);
+            /* 让头像图片刚好包含于avatar盒子中 */
+            background-size: contain;
+            /* 设置边框圆角让头像图片更加圆润 */
+            border-radius: 10%;
+        }
+
+        /* 头像文字部分 */
+        .avatarall span {
+            position: absolute;
+            left: 50%;
+            bottom: 1%;
+            transform: translateX(-50%);
+            font-size: 21px;
+            color: #fff;
+        }
+
+        /* 拒绝和接听整体部分的公共类 */
+        .common1 {
+            position: absolute;
+            bottom: 10%;            
+            width: 75px;
+            height: 100px;
+            /* background-color: skyblue; */
+            /* 让字体图标和文字都水平居中 */
+            text-align: center;
+        }
+
+        /* 拒绝整体部分x坐标 */
+        .refuseall {
+            left: 18%;
+        }
+
+        /* 接听整体部分x坐标 */
+        .acceptall {
+            right: 18%;
+        }
+
+        /* 拒绝和接听圆形按钮部分的公共类 */
+        .common2 {
+            width: 75px;
+            height: 75px;
+            /* background-color: pink; */
+            /* 设置边框圆角让整个按钮呈现圆形 */
+            border-radius: 50%;
+            /* 让字体图标垂直居中 */
+            line-height: 75px;
+        }
+
+        /* 拒绝圆形按钮部分 */
+        .refuse {
+            background-color: rgb(250, 81, 81);
+        }
+
+        /* 接听圆形按钮部分 */
+        .accept {
+            background-color: rgb(7, 193, 96);
+        }
+
+        /* 拒绝字体图标 */
+        .icon-guaduan {
+            font-size: 40px;
+            color: #fff;
+        }
+
+        /* 接听字体图标 */
+        .icon-vcr-full {
+            font-size: 30px;
+            color: #fff;
+        }
+
+        /* 拒绝和接听文字部分的公共类 */
+        .common1 span {
+            position: absolute;
+            left: 50%;
+            bottom: 1%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /* 切换整体部分 */
+        .turnall {
+            position: absolute;
+            right: 17%;
+            bottom: 30%;            
+            width: 85px;
+            height: 100px;
+            /* background-color: skyblue; */
+            /* 让字体图标和文字都水平居中 */
+            text-align: center;
+        }
+
+        /* 切换按钮部分 */
+        .turn {
+            position: absolute;
+            left: 50%;
+            top: 1%;
+            transform: translateX(-50%);
+            width: 75px;
+            height: 75px;
+            background-color: rgb(0 ,0 ,0);
+            /* 设置边框圆角让整个按钮呈现圆形 */
+            border-radius: 50%;
+            /* 让字体图标垂直居中 */
+            line-height: 75px;
+        }
+
+        /* 切换字体图标 */
+        .icon-erduo {
+            font-size: 40px;
+            color: #fff;
+        }
+
+        /* 切换文字部分 */
+        .turnall span {
+            position: absolute;
+            left: 50%;
+            bottom: 1%;
+            transform: translateX(-50%);
+            /* 让‘切到语音接听能在一行内显示’ */
+            width: 100%;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        /* 背景音乐部分 */
+        /* 其实这个绝对定位设置与否，关系不大，因为audio都被隐藏了，但是依然先写在这里，因为把这个html网页用GitHub静态部署成功后，生成的网址，用谷歌和edge浏览器打开后发现，都没有自动播放的背景音乐的，只有用手机百度打开才有声音（目前所知），希望看到这条注释的后人们，了解这一点。在pc端调试的时候，把下面audio标签中的hidden属性给删了，再去调试 */
+        audio {
+            position: absolute;
+            left: 50%;
+            top: 15%;
+            transform: translateX(-50%);
+        }
+
+        /* 让鼠标分别移入这三个按钮时，指针都能显示'小手'的形状 */
+        .refuse,
+        .accept,
+        .turn {
+            cursor: pointer;
+        }
+
+        /* 定义动画，让topword里面的dot1~3按规律显示 */
+        /* 透明度设为1表示完全不透明，可见 */        
+        @keyframes dotopacity1 {
+            25% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes dotopacity2 {
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes dotopacity3 {
+            75% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部文字部分 -->
+    <span class="topword">邀请你视频通话<span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span></span>  
+
+    <!-- 头像整体部分 -->
+    <div class="avatarall">
+        <div class="avatar"></div>
+        <span>徐 翔</i>
+    </div>
+    
+    <!-- 拒绝整体部分 -->
+    <div class="refuseall common1">
+        <div class="refuse common2">
+            <i class="iconfont icon-guaduan"></i>
+        </div>
+        <span>拒绝</span>
+    </div>
+    
+    <!-- 接听整体部分 -->
+    <div class="acceptall common1">
+        <div class="accept common2">
+            <i class="iconfont icon-vcr-full"></i>
+        </div>
+        <span>接听</span>
+    </div>
+
+    <!-- 切换整体部分 -->
+    <div class="turnall">
+        <div class="turn">
+            <i class="iconfont icon-erduo"></i>
+        </div>
+        <span>切到语音接听</span>
+    </div>
+
+    <!-- 背景音乐部分 -->
+    <!-- 给背景音乐audio标签添加hidden属性，使得播放条被隐藏 -->
+    <audio src="./images/wxls.wav" controls autoplay loop hidden></audio>
+    
+
+
+    <script>
+        var refuse = document.querySelector('.refuse');
+        refuse.addEventListener('click', function() {
+            location.assign('https://after-refuse-xuxiang.netlify.app/');
+        })
+        
+        var accept = document.querySelector('.accept');
+        accept.addEventListener('click', function() {
+            location.assign('https://after-accept-xuxiang.netlify.app/');
+        })
+
+        var turn = document.querySelector('.turn');
+        turn.addEventListener('click', function() {
+            location.assign('https://after-turn-xuxiang.netlify.app/');
+        })
+    </script>
+</body>
+</html>
